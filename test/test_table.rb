@@ -9,6 +9,7 @@ class TestPageList < Test::Unit::TestCase
   end
   def test_table_size
     list = Table.new
+    assert list.size == 0
     key,value = "test", "valuevalue"
     list.put key,value 
     assert list.size == 1
