@@ -21,7 +21,7 @@ require "socket"
 ip= IPSocket::getaddress(Socket::gethostname)
 STDOUT.puts "    job_monitor at  http://#{ip}:10080"
 STDOUT.puts "    job_server  at  druby://#{ip}:10001"
-Daemons.run_proc("job_server",options){
+Daemons.call(options){
   m=Noda::JobMonitor.new("#{ip}","10080","druby://#{ip}:10001")
   m.start_monitor
   s=Noda::JobServer.new("#{ip}", "10001")
