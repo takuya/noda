@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{noda}
-  s.version = "0.0.0"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["takuya"]
-  s.date = %q{2011-05-17}
-  s.description = %q{TODO: longer description of your gem}
-  s.email = %q{takuya.1st@gmail}
+  s.date = %q{2011-05-18}
+  s.description = %q{noda is job queue system using druby }
+  s.email = %q{takuya.1st+gem@gmail}
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -19,19 +19,20 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/noda.rb",
-    "test/helper.rb",
+    "noda.gemspec",
     "test/test_noda.rb"
   ]
   s.homepage = %q{http://github.com/takuya/noda}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.0}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{noda is job queue system}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

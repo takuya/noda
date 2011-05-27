@@ -8,6 +8,8 @@ class JobWorker
     @server_uri  = "druby://#{job_server_addr}:#{job_server_port}"
     @max_retry_connect  = 30
     @wait_time_to_retry =  2
+    require "socket" 
+    @local_addr = IPSocket::getaddress(Socket::gethostname)
     self.connect
   end
   def connect_job_server
@@ -15,6 +17,7 @@ class JobWorker
     begin 
       @job =DRbObject.new_with_uri(@server_uri)
       @job.hash_table
+      @logger = @job.logger
     rescue DRb::DRbConnError => e
       error_conter +=1
       raise e if error_conter > @max_retry_connect
@@ -23,15 +26,19 @@ class JobWorker
     end
   end
   def handle_task()
+    # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i try to pop a task."} 
     task = @job.input.pop
+    # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i got a task-#{task.name}"} 
+    # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i start handling a task-#{task.name}"} 
     result = task.do_task(@job.hash_table)
     @job.output.push result
   end
   def init_thread
     @table = @job.hash_table
-    @thread= Thread.new {
+    @thread= Thread.new{
         loop{
           self.handle_task()
+          sleep 0.001
         }
     }
   end
@@ -43,18 +50,11 @@ class JobWorker
     @thread.join
   end
   def status
-    @thread.status
+    @thread.status if @thread
   end
   def stop
     @thread.kill
   end
-end
-
-
-def JobWorker.start_service( job_server_addr="localhost",job_server_port="10001" )
-  w=JobWorker.new( job_server_addr,job_server_port)
-  w.start
-  w
 end
 
 end

@@ -1,6 +1,8 @@
 = noda
 
-Description goes here.
+Noda はシンプルなジョブキューサーバーです.
+
+drubyを使用して，マルチスレッドを分散サーバで実現しています．
 
 == Contributing to noda
  
@@ -14,6 +16,6 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2011 takuya. See LICENSE.txt for
+Copyright (c) 2011 takuya_1st. See LICENSE.txt for
 further details.
 

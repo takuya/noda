@@ -42,6 +42,11 @@ class RQueue
     @list.size >= @max if @max
   end
   def all() self.firsts(self.size) end
+  # ‚P‚©‚ç‚m‚Ü‚Å‚Ì’l‚ğæ‚éB‚On‚Ü‚è‚Å‚È‚¢‚±‚Æ‚É’ˆÓ
+  def _at(pos) 
+    i = pos - 1 
+    return @list.at(i) if (i) < self.size 
+  end
 end
 
 

@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "noda"
   gem.homepage = "http://github.com/takuya/noda"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{noda is job queue system}
+  gem.description = %Q{noda is job queue system using druby }
   gem.email = "takuya.1st@gmail"
   gem.authors = ["takuya"]
   # dependencies defined in Gemfile

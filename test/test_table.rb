@@ -22,9 +22,29 @@ class TestPageList < Test::Unit::TestCase
   end
   def test_table_each
     list = Table.new
-    ("a".."e").each_with_index{|v,k| list.put v,k+1 }
-    ("a".."e").each_with_index{|v,k| assert(list.get(v)== k+1 ) }
+    data = { "a"=> "aa","b"=>"bv", "c"=> "cc", "d"=> "dd" }
+    data.each{|k,v| list.put k,v }
+    data.each{|k,v| assert list.get(k) == v }
+    list.each{|k,v| assert data[k] == v }
   end
-  ##mutexできちんとロックされるか?はテスト必要ないと思う
+  def test_save_table_data
+    list = Table.new
+    key,value = "test", "valuevalue"
+    list.put key,value 
+    assert list.saved?(key) == false
+    list.update_saved_at(key)
+    assert list.saved?(key) == true
+  end
+  def test_table_each_unsaved_pair
+    list = Table.new
+    data = { "a"=> "aa","b"=>"bb", "c"=> "cc", "d"=> "dd" }
+    data.each{|k,v| list.put k,v }
+    list.put( "abc","123")
+    list.update_saved_at("abc")
+    assert list.saved?("abc")
+    a={}
+    list.each_unsaved_pair{|k,v|  a[k]=v }
+    assert a.sort == data.sort
+  end
 
 end
