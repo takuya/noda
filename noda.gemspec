@@ -5,13 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{noda}
-  s.version = "0.0.3"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["takuya"]
-  s.date = %q{2011-05-18}
+  s.date = %q{2011-05-28}
   s.description = %q{noda is job queue system using druby }
-  s.email = %q{takuya.1st+gem@gmail}
+  s.email = %q{takuya.1st@gmail}
+  s.executables = ["noda_job_worker", "noda_job_server"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -24,9 +25,26 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "bin/noda_job_server",
+    "bin/noda_job_worker",
     "lib/noda.rb",
+    "lib/noda/job_monitor.rb",
+    "lib/noda/job_server.rb",
+    "lib/noda/job_worker.rb",
+    "lib/noda/rqueue.rb",
+    "lib/noda/table.rb",
+    "lib/noda/table_auto_saver.rb",
+    "lib/noda/task.rb",
     "noda.gemspec",
-    "test/test_noda.rb"
+    "test/test_helper.rb",
+    "test/test_job_monitor.rb",
+    "test/test_job_server.rb",
+    "test/test_job_worker.rb",
+    "test/test_noda.rb",
+    "test/test_rqueue.rb",
+    "test/test_table.rb",
+    "test/test_table_saver_woker.rb",
+    "test/test_task.rb"
   ]
   s.homepage = %q{http://github.com/takuya/noda}
   s.licenses = ["MIT"]
