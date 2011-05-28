@@ -18,9 +18,9 @@ options = {
     :monitor    => true
   }
 require "socket" 
-ip==TCPSocket.gethostbyname(Socket::gethostname).last
+ip=TCPSocket.gethostbyname(Socket::gethostname).last
 STDOUT.puts " connect to   job_server  at  druby://#{ip}:10001"
-Daemons.call(options){
+Daemons.run_proc("job_worker",options){
   s=Noda::JobWorker.new("#{ip}", "10001")
   s.start_service
 }

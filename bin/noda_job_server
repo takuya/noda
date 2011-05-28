@@ -18,7 +18,7 @@ options = {
     :monitor    => true
   }
 require "socket" 
-ip==TCPSocket.gethostbyname(Socket::gethostname).last
+ip=TCPSocket.gethostbyname(Socket::gethostname).last
 STDOUT.puts "    job_monitor at  http://#{ip}:10080"
 STDOUT.puts "    job_server  at  druby://#{ip}:10001"
 Daemons.run_proc("job_server",options){
