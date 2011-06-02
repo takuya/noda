@@ -3,7 +3,8 @@ class TestJobWoker < Test::Unit::TestCase
 
 
   def test_init_job_woker
-    worker = JobWorker.new
+    s=JobServer.new("localhost", "10001")
+    worker = JobWorker.new("localhost", "10001")
     assert worker
   end
   #test task 
@@ -13,8 +14,8 @@ class TestJobWoker < Test::Unit::TestCase
     end
   end
   def test_start_stop
-    s =JobServer.new
-    w = JobWorker.new
+    s=JobServer.new("localhost", "10002")
+    w = JobWorker.new("localhost", "10002")
     t = Thread.new{
       w.start
     }
@@ -26,8 +27,8 @@ class TestJobWoker < Test::Unit::TestCase
     assert w.status == false #スレッド終了できた？
   end
   def test_do_task
-    s=JobServer.new
-    worker = JobWorker.new
+    s=JobServer.new("localhost", "10003")
+    worker = JobWorker.new("localhost", "10003")
     s.input.push MyTask.new
     worker.handle_task
     ret = s.output.pop
@@ -42,8 +43,8 @@ class TestJobWoker < Test::Unit::TestCase
   end
   def test_task_write_hash_table
     #ジョブサーバーの共有領域に書き込めるかどうか
-    s=JobServer.new
-    worker = JobWorker.new
+    s=JobServer.new("localhost", "10004")
+    worker = JobWorker.new("localhost", "10004")
     s.input.push MyTask2.new
     worker.handle_task
     ret = s.output.pop
@@ -51,5 +52,25 @@ class TestJobWoker < Test::Unit::TestCase
     v = s.hash_table.get "MyTask"
     assert v == "foooo"
     s.stop
+  end
+  def test_task_class_load
+    s=JobServer.new("localhost", "10005")
+    worker = JobWorker.new("localhost", "10005")
+    str = "class MyTaskTime\n
+    attr_accessor :name
+    def initialize(name)
+      @name = name
+    end
+    def do_task(hash)
+      return self.name+1.to_s
+    end
+    end
+    "
+    s.add_task_class("MyTaskTime",str)
+    eval(str)
+    s.input.push MyTaskTime.new("test_task")
+    worker.handle_task
+    ret = s.output.pop
+    assert ret == "test_task1"
   end
 end

@@ -10,6 +10,7 @@ class JobServer
     @server     = DRb.start_service("druby://#{addr}:#{port}",self)
     @thread     = @server.thread
     @logger     = Logger.new(log_file)
+    @task_class_source_list = {}
   end
   def stop
     @server.stop_service
@@ -32,6 +33,15 @@ class JobServer
   end
   def logger
     @logger
+  end
+  def add_task_class(class_name, source_code)
+    @task_class_source_list[class_name] = source_code
+  end
+  def task_class(class_name)
+    @task_class_source_list[class_name]
+  end
+  def task_class_source_list
+    @task_class_source_list
   end
 end
 

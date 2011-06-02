@@ -3,14 +3,14 @@ Thread.abort_on_exception=true
 
 class TestTableSaverWorker < Test::Unit::TestCase
   def test_table_saver_initialize
-    s = JobServer.new("localhost","10001")
+    s = JobServer.new("localhost","10011")
     saver = TableAutoSaver.new
     saver.interval = 12
     assert saver.interval == 12
   end
   def test_table_saver_save_dir
-    s = JobServer.new("localhost","10002")
-    saver = TableAutoSaver.new("localhost","10002")
+    s = JobServer.new("localhost","10012")
+    saver = TableAutoSaver.new("localhost","10012")
     begin 
       saver.save_dir = Dir.tmpdir + "a"
     rescue => e
@@ -23,8 +23,8 @@ class TestTableSaverWorker < Test::Unit::TestCase
     assert FileTest.exists? d == false
   end
   def test_table_saver_save_dir
-    s = JobServer.new("localhost","10003")
-    saver = TableAutoSaver.new("localhost","10003")
+    s = JobServer.new("localhost","10013")
+    saver = TableAutoSaver.new("localhost","10013")
     t1 = saver.init_thread
     t2 = Thread.new{
       s.hash_table.put("aaaa",1234)

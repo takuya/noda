@@ -11,6 +11,7 @@ class JobWorker
     require "socket" 
     @local_addr = IPSocket::getaddress(Socket::gethostname)
     self.connect
+    self
   end
   def connect_job_server
     error_conter = 0
@@ -28,10 +29,14 @@ class JobWorker
   def handle_task()
     # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i try to pop a task."} 
     task = @job.input.pop
-    # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i got a task-#{task.name}"} 
-    # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i start handling a task-#{task.name}"} 
+    self.load_class if task.class ==  DRb::DRbUnknown
     result = task.do_task(@job.hash_table)
     @job.output.push result
+  end
+  def load_class
+    @job.task_class_source_list.each{|k,v|
+      eval(v)
+    }
   end
   def init_thread
     @table = @job.hash_table

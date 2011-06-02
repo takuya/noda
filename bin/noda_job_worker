@@ -20,8 +20,10 @@ options = {
 require "socket" 
 ip=TCPSocket.gethostbyname(Socket::gethostname).last
 STDOUT.puts " connect to   job_server  at  druby://#{ip}:10001"
+STDOUT.puts " job_worekr   working     at  druby://#{ip}:10101"
 Daemons.run_proc("job_worker",options){
-  s=Noda::JobWorker.new("#{ip}", "10001")
-  s.start_service
+  w=Noda::JobWorker.new("#{ip}", "10001")
+  t = DRb.start_service("druby://#{ip}:10101",w)
+  w.start_service
 }
 
