@@ -8,9 +8,23 @@ module Noda
 #   w=Noda::JobWorker.new("#{ip}", "10001")
 #   t = DRb.start_service("druby://#{ip}:10101",w)
 #   w.start
-# 
+# Taskをサーバー経由で送信する
+#   ip=127.0.0.1
+#   server = Noda::JobServer.new ip,"10001"
+#   str = %Q'
+#          class Noda::MyTask
+#            def do_task(table)
+#               table.put @name, "#{Process.pid} : #{Time.now}"
+#               return "#{@name} in #{Process.pid} : #{Time.now}"
+#            end
+#            def initialize(name) @name end
+#          end
+#   '
+#   eval(str)
+#   task = Noda::MyTask.new("test")
+#   server.add_task_class( task.class.to_s, str)
+#   10.times{|i| server.input.push Noda::MyTask.new(i) }
 #
-
 class JobWorker
   attr_reader :thread
   attr_accessor :max_retry_connect , :wait_time_to_retry
@@ -59,7 +73,7 @@ class JobWorker
   # *name クラス名
   def load_class(name)
     s = @job.task_class(name)
-    Noda.module_eval(s)
+    Noda.module_eval(s) if s
   end
   # ワーカーのメインスレッドを起動します．start で使います．
   def init_thread
