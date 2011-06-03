@@ -29,14 +29,16 @@ class JobWorker
   def handle_task()
     # @logger.info("self.class@#{@local_addr}#{self.object_id}"){"i try to pop a task."} 
     task = @job.input.pop
-    self.load_class if task.class ==  DRb::DRbUnknown
+    if task.class ==  DRb::DRbUnknown
+      self.load_class(task.name)
+      task = task.reload
+    end
     result = task.do_task(@job.hash_table)
     @job.output.push result
   end
-  def load_class
-    @job.task_class_source_list.each{|k,v|
-      eval(v)
-    }
+  def load_class(name)
+    s = @job.task_class(name)
+    Noda.module_eval(s)
   end
   def init_thread
     @table = @job.hash_table

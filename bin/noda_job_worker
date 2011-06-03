@@ -24,6 +24,6 @@ STDOUT.puts " job_worekr   working     at  druby://#{ip}:10101"
 Daemons.run_proc("job_worker",options){
   w=Noda::JobWorker.new("#{ip}", "10001")
   t = DRb.start_service("druby://#{ip}:10101",w)
-  w.start_service
+  w.start
 }
 
