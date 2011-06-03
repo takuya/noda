@@ -17,7 +17,7 @@ class JobWorker
   # * server_addr ジョブサーバーアドレス、またはホスト名
   # * server_port ジョブサーバーポート
   def initialize( server_addr="localhost",server_port="10001",q="" )
-    @server_uri  = "druby://#{server_addr}:#{server_port}/?#{q}"
+    @server_uri  = "druby://#{server_addr}:#{server_port}"
     @max_retry_connect  = 30
     @wait_time_to_retry =  2
     require "socket" 
