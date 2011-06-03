@@ -1,5 +1,8 @@
 
 module Noda
+#=概要
+# ジョブ状態を監視するWEBサーバーです。
+# DRBに接続して，キュー残数，共有ハッシュテーブル、キューの中身を見ることが出来ます．
 
 class JobMonitor
   require 'webrick'

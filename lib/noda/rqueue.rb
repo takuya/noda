@@ -2,6 +2,10 @@
 
 module Noda
 require 'monitor'
+# ジョブのキュー実装
+# キューはスレッドセーフに書いている
+#
+#
 class RQueue
   include DRb::DRbUndumped 
   attr_reader :name
