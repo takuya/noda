@@ -1,8 +1,13 @@
 
 module Noda
-#=ŠT—v
-# ƒWƒ‡ƒuó‘Ô‚ğŠÄ‹‚·‚éWEBƒT[ƒo[‚Å‚·B
-# DRB‚ÉÚ‘±‚µ‚ÄCƒLƒ…[c”C‹¤—LƒnƒbƒVƒ…ƒe[ƒuƒ‹AƒLƒ…[‚Ì’†g‚ğŒ©‚é‚±‚Æ‚ªo—ˆ‚Ü‚·D
+#=æ¦‚è¦
+# ã‚¸ãƒ§ãƒ–çŠ¶æ…‹ã‚’ç›£è¦–ã™ã‚‹WEBã‚µãƒ¼ãƒãƒ¼ã§ã™ã€‚
+# DRBã«æ¥ç¶šã—ã¦ï¼Œã‚­ãƒ¥ãƒ¼æ®‹æ•°ï¼Œå…±æœ‰ãƒãƒƒã‚·ãƒ¥ãƒ†ãƒ¼ãƒ–ãƒ«ã€ã‚­ãƒ¥ãƒ¼ã®ä¸­èº«ã‚’è¦‹ã‚‹ã“ã¨ãŒå‡ºæ¥ã¾ã™ï¼
+# == ä½¿ã„æ–¹
+#      m=Noda::JobMonitor.new("#{ip}","10080","druby://#{ip}:10001")
+#      m.start_monitor
+# ==ã‚³ãƒãƒ³ãƒ‰ã§èµ·å‹•
+#    $ noda_job_server start
 
 class JobMonitor
   require 'webrick'
@@ -21,12 +26,13 @@ class JobMonitor
   def stop_monitor
     @web_server.stop
   end
+  # å†…éƒ¨ã§ä½¿ã†WEBRickã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã—ã¦ãƒã‚¦ãƒ³ãƒˆã—ã¾ã™ï¼
   def init_webrick
     config = WEBrick::Config::HTTP
     config[:Port] = @port
     config[:BindAddress]=@addr
-    config[:AccessLog] = WEBrick::Log.new("/dev/null",1)    #ƒƒO—v‚ç‚È‚¢D
-    config[:Logger] = Logger.new("/dev/null")    #ƒƒO—v‚ç‚È‚¢D
+    config[:AccessLog] = WEBrick::Log.new("/dev/null",1)    #ãƒ­ã‚°è¦ã‚‰ãªã„ï¼
+    config[:Logger] = Logger.new("/dev/null")    #ãƒ­ã‚°è¦ã‚‰ãªã„ï¼
     @web_server = WEBrick::HTTPServer.new(config)
     @web_server.mount_proc '/' do |req,res|
       res.content_type="text/plain"

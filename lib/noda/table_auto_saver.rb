@@ -1,4 +1,24 @@
 module Noda
+# ==ジョブテーブルの自動保存
+# ジョブワーカーのテスト実装.
+# タスクを実行無いワーカー
+# ジョブサーバーのテーブルにたまったデータをファイルにダンプしていきます．
+#   s = JobServer.new("localhost","10013")
+#   saver = TableAutoSaver.new("localhost","10013")
+#   t1 = saver.init_thread
+#   t2 = Thread.new{
+#     s.hash_table.put("aaaa",1234)# =>保存される
+#     s.hash_table.put("baaa",1234)# =>保存される
+#     s.hash_table.put("caaa",1234)# =>保存される
+#     s.hash_table.put("daaa",1234)# =>保存される
+#     s.hash_table.put("eaaa",1234)# =>保存される
+#     while(s.hash_table.has_unsaved_key? )
+#       sleep 0.001
+#     end
+#   }
+#   
+#   t2.join
+    
 
 class TableAutoSaver < JobWorker
   attr_reader :thread

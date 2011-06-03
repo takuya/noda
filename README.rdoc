@@ -1,8 +1,14 @@
 = noda
 
-Noda ‚ÍƒVƒ“ƒvƒ‹‚ÈƒWƒ‡ƒuƒLƒ…[ƒT[ƒo[‚Å‚·.
+Noda is simple Job Queue server 
 
-druby‚ğg—p‚µ‚ÄCƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚ğ•ªUƒT[ƒo‚ÅÀŒ»‚µ‚Ä‚¢‚Ü‚·D
+Noda ã¯ã‚·ãƒ³ãƒ—ãƒ«ãªã‚¸ãƒ§ãƒ–ã‚­ãƒ¥ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã§ã™.
+
+
+drubyã‚’ä½¿ç”¨ã—ã¦ï¼Œãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã‚’åˆ†æ•£ã‚µãƒ¼ãƒã§å®Ÿç¾ã—ã¦ã„ã¾ã™ï¼
+
+Noda uses druby that make easy to multi threading via network.
+
 
 == Contributing to noda
  
