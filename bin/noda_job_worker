@@ -10,7 +10,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../lib/noda")
 KCODE='s'
 options = {
     :dir_mode   => :script,
-    :dir        => '/var/run',
+    :dir        => '/var/run/noda',
     :multiple   => true,
     :ontop      => false,
     :mode       => :exec,
