@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{noda}
-  s.version = "0.0.14"
+  s.version = "0.0.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["takuya"]
-  s.date = %q{2011-06-04}
+  s.date = %q{2011-06-12}
   s.description = %q{noda is job queue system using druby }
   s.email = %q{takuya.1st@gmail}
   s.executables = ["noda_job_worker", "noda_job_server"]
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
     "lib/noda/table.rb",
     "lib/noda/table_auto_saver.rb",
     "lib/noda/task.rb",
+    "noda.gemspec",
     "test/test_helper.rb",
     "test/test_job_monitor.rb",
     "test/test_job_server.rb",
