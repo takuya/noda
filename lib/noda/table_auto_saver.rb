@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Noda
 # ==ジョブテーブルの自動保存
 # ジョブワーカーのテスト実装.

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'rubygems'
 require 'drb/drb'
 require 'logger'
@@ -12,7 +13,9 @@ require 'noda/table'
 require 'noda/task'
 require 'noda/table'
 require 'noda/table_auto_saver'
-
+# ==Žg‚¢•û
+#   require 'noda'
+#   Noda::JobServer.new.start_service
 module Noda
   #VERSION = '0.0.1'
 end

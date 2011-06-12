@@ -1,4 +1,4 @@
-# -*- utf8 -*-
+# encoding: utf-8
 
 module Noda
 require 'monitor'
